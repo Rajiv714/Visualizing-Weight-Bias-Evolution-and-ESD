@@ -1,10 +1,59 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8">
   <title>Visualization Dashboard</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f4f4f4;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+    }
+
+    h2 {
+      font-size: 32px;
+      color: #333;
+      margin-bottom: 20px;
+    }
+
+    select {
+      font-size: 18px;
+      padding: 12px 20px;
+      width: 420px;
+      max-width: 90%;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Optional hover/focus style */
+    select:focus {
+      outline: none;
+      border-color: #555;
+    }
+
+    /* Space for additional description or info */
+    .info-section {
+      margin-top: 40px;
+      width: 80%;
+      max-width: 800px;
+      text-align: center;
+      color: #555;
+      font-size: 16px;
+    }
+  </style>
 </head>
 <body>
+
   <h2>Select a Visualization</h2>
+
+  <!-- Dropdown Selector -->
   <select id="ADVST">
     <option value="">-- Choose an option --</option>
     <option value="alpha_all_layers.html">1) Growth of alpha values of each layer and each epoch</option>
@@ -17,6 +66,7 @@
     <option value="esd_loglog.mp4">8) Changing of ESD and Log Log plots (Video)</option>
   </select>
 
+  <!-- JS to handle navigation -->
   <script>
     document.getElementById('ADVST').addEventListener('change', function () {
       const selected = this.value;
@@ -25,5 +75,15 @@
       }
     });
   </script>
+
+  <!-- Add custom text/description here if needed -->
+  <div class="info-section">
+    <!-- 
+      You can add any paragraph or description here later.
+      For example: What each chart means, insights, observations, etc.
+    -->
+    <!-- <p>This dashboard helps visualize how alpha values evolve across model layers and epochs.</p> -->
+  </div>
+
 </body>
 </html>
