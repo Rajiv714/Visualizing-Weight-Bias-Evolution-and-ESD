@@ -2,130 +2,94 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Visualization Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Understanding Weight Dynamics and Generalization</title>
+  <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    * {
-      box-sizing: border-box;
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
-
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: 'Segoe UI', Tahoma, sans-serif;
-      background: linear-gradient(135deg, #e0ecff, #ffffff);
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+    .fade-in {
+      animation: fadeIn 1s ease-out;
     }
-
-    .container {
-      background: white;
-      padding: 40px;
-      border-radius: 15px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-      text-align: center;
-      width: 90%;
-      max-width: 600px;
-    }
-
-    h2 {
-      font-size: 30px;
-      margin-bottom: 30px;
-      color: #333;
-    }
-
-    .custom-dropdown {
-      position: relative;
-      display: inline-block;
-      width: 100%;
-      text-align: left;
-    }
-
-    .dropdown-selected {
-      background-color: #f1f1f1;
-      padding: 15px 20px;
-      font-size: 18px;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: 0.3s ease;
-    }
-
-    .dropdown-selected:hover {
-      background-color: #e6e6e6;
-    }
-
     .dropdown-items {
-      position: absolute;
-      background-color: white;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      margin-top: 5px;
-      width: 100%;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-      z-index: 1;
       max-height: 0;
       overflow: hidden;
       transition: max-height 0.3s ease;
     }
-
     .dropdown-items.open {
       max-height: 500px;
     }
-
-    .dropdown-items div {
-      padding: 12px 20px;
-      cursor: pointer;
-      font-size: 17px;
-      transition: background-color 0.2s ease;
-    }
-
-    .dropdown-items div:hover {
-      background-color: #f0f0f0;
-    }
-
-    .info-section {
-      margin-top: 40px;
-      color: #666;
-      font-size: 16px;
-    }
-
-    @media (max-width: 500px) {
-      h2 {
-        font-size: 24px;
-      }
-      .dropdown-selected, .dropdown-items div {
-        font-size: 16px;
-      }
-    }
   </style>
 </head>
-<body>
+<body class="bg-gradient-to-br from-blue-50 to-gray-100 min-h-screen flex items-center justify-center p-4">
+  <div class="bg-white rounded-2xl shadow-xl max-w-4xl w-full p-8 md:p-12">
+    <!-- Header -->
+    <h1 class="text-3xl md:text-4xl font-bold text-gray-800 text-center mb-6">
+      Understanding Weight Dynamics and Generalization
+    </h1>
+    <p class="text-center text-gray-600 mb-8">
+      Spectral Analysis of Neural Networks on CIFAR-100
+    </p>
 
-  <div class="container">
-    <h2>Select a Visualization</h2>
+    <!-- Project Description -->
+    <div class="text-gray-700 leading-relaxed mb-8 fade-in">
+      <p class="mb-4">
+        This project investigates the internal dynamics of a neural network trained on the CIFAR-100 dataset — a complex image classification benchmark. Instead of focusing solely on accuracy, we analyze how the network’s weights and biases evolve during training to uncover insights into its learning process.
+      </p>
+      <p class="mb-4">
+        By tracking weight and bias distributions across epochs using normalized histograms, we identify training regimes like underfitting, generalization sweet spots, and overfitting. We complement this with <strong>Empirical Spectral Density (ESD)</strong> analysis of weight matrices, revealing structural properties and generalization behavior through eigenvalue distributions. Using the <em>weightwatcher</em> Python package, we compute power-law exponents from log-log plots, which are linked to the model’s generalization ability.
+      </p>
+      <p class="mb-4">
+        Interactive visualizations and animations showcase how weight histograms and ESDs evolve epoch-wise, offering a dynamic view of learning. Each layer’s spectral profile — from clustered eigenvalues in early training to heavy-tailed distributions — tells a story of how modern deep networks learn and sometimes fail to generalize.
+      </p>
+      <p>
+        Select a visualization below to explore the spectral and distributional insights, bridging empirical observations with theoretical understanding.
+      </p>
+    </div>
 
     <!-- Custom Dropdown -->
-    <div class="custom-dropdown">
-      <div class="dropdown-selected" id="dropdown-toggle">-- Choose an option --</div>
-      <div class="dropdown-items" id="dropdown-options">
-        <div data-link="alpha_all_layers.html">1) Growth of alpha values of each layer and each epoch</div>
-        <div data-link="alpha_conv_layer.html">2) Growth of Alphas of Conv Layer Epoch-wise</div>
-        <div data-link="alpha_layer1.html">3) Growth of Alpha of Layer 1 Epoch-wise</div>
-        <div data-link="alpha_layer2.html">4) Growth of Alpha of Layer 2 Epoch-wise</div>
-        <div data-link="alpha_layer3.html">5) Growth of Alpha of Layer 3 Epoch-wise</div>
-        <div data-link="alpha_layer4.html">6) Growth of Alpha of Layer 4 Epoch-wise</div>
-        <div data-link="alpha_linear.html">7) Growth of Alpha of Linear Layer Epoch-wise</div>
-        <div data-link="esd_loglog.html">8) Changing of ESD and Log Log plots (Video)</div>
+    <div class="max-w-md mx-auto mb-8">
+      <h2 class="text-2xl font-semibold text-gray-800 mb-4 text-center">
+        Select a Visualization
+      </h2>
+      <div class="relative">
+        <div
+          id="dropdown-toggle"
+          class="bg-gray-100 text-gray-800 font-medium py-3 px-4 rounded-lg cursor-pointer hover:bg-gray-200 transition duration-200"
+        >
+          -- Choose an option --
+        </div>
+        <div id="dropdown-options" class="dropdown-items absolute w-full bg-white border border-gray-200 rounded-lg mt-1 shadow-lg z-10">
+          <div class="py-2 px-4 hover:bg-gray-100 cursor-pointer" data-link="alpha_all_layers.html">
+            1) Growth of alpha values of each layer and each epoch
+          </div>
+          <div class="py-2 px-4 hover:bg-gray-100 cursor-pointer" data-link="alpha_conv_layer.html">
+            2) Growth of Alphas of Conv Layer Epoch-wise
+          </div>
+          <div class="py-2 px-4 hover:bg-gray-100 cursor-pointer" data-link="alpha_layer1.html">
+            3) Growth of Alpha of Layer 1 Epoch-wise
+          </div>
+          <div class="py-2 px-4 hover:bg-gray-100 cursor-pointer" data-link="alpha_layer2.html">
+            4) Growth of Alpha of Layer 2 Epoch-wise
+          </div>
+          <div class="py-2 px-4 hover:bg-gray-100 cursor-pointer" data-link="alpha_layer3.html">
+            5) Growth of Alpha of Layer 3 Epoch-wise
+          </div>
+          <div class="py-2 px-4 hover:bg-gray-100 cursor-pointer" data-link="alpha_layer4.html">
+            6) Growth of Alpha of Layer 4 Epoch-wise
+          </div>
+          <div class="py-2 px-4 hover:bg-gray-100 cursor-pointer" data-link="alpha_linear.html">
+            7) Growth of Alpha of Linear Layer Epoch-wise
+          </div>
+          <div class="py-2 px-4 hover:bg-gray-100 cursor-pointer" data-link="esd_loglog.html">
+            8) Changing of ESD and Log Log plots (Video)
+          </div>
+        </div>
       </div>
     </div>
 
-    <!-- Optional Notes Section -->
-    <div class="info-section">
-      <!-- Add your explanation or paragraph here -->
-      <!-- Example: <p>This dashboard allows you to explore trends across different layers of the model.</p> -->
-    </div>
   </div>
 
   <script>
@@ -149,12 +113,11 @@
     });
 
     // Close dropdown if clicked outside
-    document.addEventListener('click', function (event) {
-      if (!event.target.closest('.custom-dropdown')) {
+    document.addEventListener('click', function(event) {
+      if (!event.target.closest('.relative')) {
         options.classList.remove('open');
       }
     });
   </script>
-
 </body>
 </html>
