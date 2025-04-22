@@ -1,72 +1,103 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Visualization Dashboard</title>
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       margin: 0;
       padding: 0;
-      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #f4f4f4;
+      background-color: #f0f2f5;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
-      flex-direction: column;
+    }
+
+    .container {
+      text-align: center;
+      background: #fff;
+      padding: 50px 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      width: 90%;
+      max-width: 600px;
     }
 
     h2 {
-      font-size: 32px;
+      font-size: 28px;
       color: #333;
-      margin-bottom: 20px;
+      margin-bottom: 30px;
     }
 
     select {
       font-size: 18px;
-      padding: 12px 20px;
-      width: 420px;
-      max-width: 90%;
+      padding: 14px 18px;
+      width: 100%;
       border-radius: 8px;
       border: 1px solid #ccc;
-      box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+      background-color: #fafafa;
+      transition: border 0.2s ease;
     }
 
-    /* Optional hover/focus style */
     select:focus {
-      outline: none;
       border-color: #555;
+      outline: none;
     }
 
-    /* Space for additional description or info */
     .info-section {
       margin-top: 40px;
-      width: 80%;
-      max-width: 800px;
-      text-align: center;
-      color: #555;
       font-size: 16px;
+      color: #666;
+    }
+
+    /* Responsive: Stack on smaller screens */
+    @media (max-width: 500px) {
+      h2 {
+        font-size: 22px;
+      }
+
+      select {
+        font-size: 16px;
+      }
+
+      .info-section {
+        font-size: 14px;
+      }
     }
   </style>
 </head>
 <body>
 
-  <h2>Select a Visualization</h2>
+  <div class="container">
+    <h2>Select a Visualization</h2>
 
-  <!-- Dropdown Selector -->
-  <select id="ADVST">
-    <option value="">-- Choose an option --</option>
-    <option value="alpha_all_layers.html">1) Growth of alpha values of each layer and each epoch</option>
-    <option value="alpha_conv_layer.html">2) Growth of Alphas of Conv Layer Epoch-wise</option>
-    <option value="alpha_layer1.html">3) Growth of Alpha of Layer 1 Epoch-wise</option>
-    <option value="alpha_layer2.html">4) Growth of Alpha of Layer 2 Epoch-wise</option>
-    <option value="alpha_layer3.html">5) Growth of Alpha of Layer 3 Epoch-wise</option>
-    <option value="alpha_layer4.html">6) Growth of Alpha of Layer 4 Epoch-wise</option>
-    <option value="alpha_linear.html">7) Growth of Alpha of Linear Layer Epoch-wise</option>
-    <option value="esd_loglog.mp4">8) Changing of ESD and Log Log plots (Video)</option>
-  </select>
+    <!-- Dropdown -->
+    <select id="ADVST">
+      <option value="">-- Choose an option --</option>
+      <option value="alpha_all_layers.html">1) Growth of alpha values of each layer and each epoch</option>
+      <option value="alpha_conv_layer.html">2) Growth of Alphas of Conv Layer Epoch-wise</option>
+      <option value="alpha_layer1.html">3) Growth of Alpha of Layer 1 Epoch-wise</option>
+      <option value="alpha_layer2.html">4) Growth of Alpha of Layer 2 Epoch-wise</option>
+      <option value="alpha_layer3.html">5) Growth of Alpha of Layer 3 Epoch-wise</option>
+      <option value="alpha_layer4.html">6) Growth of Alpha of Layer 4 Epoch-wise</option>
+      <option value="alpha_linear.html">7) Growth of Alpha of Linear Layer Epoch-wise</option>
+      <option value="esd_loglog.mp4">8) Changing of ESD and Log Log plots (Video)</option>
+    </select>
 
-  <!-- JS to handle navigation -->
+    <!-- Placeholder for later descriptions or notes -->
+    <div class="info-section">
+      <!-- Add your summary/notes/explanation here later if needed -->
+      <!-- Example: <p>This dashboard provides interactive views for model layer alpha value progression.</p> -->
+    </div>
+  </div>
+
+  <!-- Dropdown navigation logic -->
   <script>
     document.getElementById('ADVST').addEventListener('change', function () {
       const selected = this.value;
@@ -75,15 +106,6 @@
       }
     });
   </script>
-
-  <!-- Add custom text/description here if needed -->
-  <div class="info-section">
-    <!-- 
-      You can add any paragraph or description here later.
-      For example: What each chart means, insights, observations, etc.
-    -->
-    <!-- <p>This dashboard helps visualize how alpha values evolve across model layers and epochs.</p> -->
-  </div>
 
 </body>
 </html>
