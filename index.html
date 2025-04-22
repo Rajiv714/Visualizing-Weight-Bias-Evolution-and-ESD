@@ -24,7 +24,7 @@
   </style>
 </head>
 <body class="bg-gradient-to-br from-blue-50 to-gray-100 min-h-screen flex items-center justify-center p-4">
-  <div class="bg-white rounded-2xl shadow-xl max-w-5xl w-full p-8 md:p-12">
+  <div class="bg-white rounded-2xl shadow-xl max-w-8xl w-full p-8 md:p-12">
     <!-- Header -->
     <h1 class="text-3xl md:text-4xl font-bold text-gray-800 text-center mb-6">
       Understanding Weight Dynamics and Generalization
@@ -36,13 +36,13 @@
     <!-- Project Description -->
     <div class="text-gray-700 leading-relaxed mb-8 fade-in">
       <p class="mb-4">
-        This project investigates the internal dynamics of a neural network trained on the CIFAR-100 dataset — a complex image classification benchmark. Instead of focusing solely on accuracy, we analyze how the network’s weights and biases evolve during training to uncover insights into its learning process.
+        This project investigates the internal dynamics of a neural network trained on the CIFAR-100 dataset a complex image classification benchmark. Instead of focusing solely on accuracy, we analyze how the network’s weights and biases evolve during training to uncover insights into its learning process.
       </p>
       <p class="mb-4">
         By tracking weight and bias distributions across epochs using normalized histograms, we identify training regimes like underfitting, generalization sweet spots, and overfitting. We complement this with <strong>Empirical Spectral Density (ESD)</strong> analysis of weight matrices, revealing structural properties and generalization behavior through eigenvalue distributions. Using the <em>weightwatcher</em> Python package, we compute power-law exponents from log-log plots, which are linked to the model’s generalization ability.
       </p>
       <p class="mb-4">
-        Interactive visualizations and animations showcase how weight histograms and ESDs evolve epoch-wise, offering a dynamic view of learning. Each layer’s spectral profile — from clustered eigenvalues in early training to heavy-tailed distributions — tells a story of how modern deep networks learn and sometimes fail to generalize.
+        Interactive visualizations and animations showcase how weight histograms and ESDs evolve epoch-wise, offering a dynamic view of learning. Each layer’s spectral profile from clustered eigenvalues in early training to heavy-tailed distributions tells a story of how modern deep networks learn and sometimes fail to generalize.
       </p>
       <p>
         Select a visualization below to explore the spectral and distributional insights, bridging empirical observations with theoretical understanding.
@@ -63,28 +63,28 @@
         </div>
         <div id="dropdown-options" class="dropdown-items absolute w-full bg-white border border-gray-200 rounded-lg mt-1 shadow-lg z-10">
           <div class="py-2 px-4 hover:bg-gray-100 cursor-pointer" data-link="alpha_all_layers.html">
-            1) Growth of alpha values of each layer and each epoch
+            1) Growth of Alpha values of each layer by epochs
           </div>
           <div class="py-2 px-4 hover:bg-gray-100 cursor-pointer" data-link="alpha_conv_layer.html">
-            2) Growth of Alphas of Conv Layer Epoch-wise
+            2) Growth of Weights and Bias of Conv Layer Epoch-wise
           </div>
           <div class="py-2 px-4 hover:bg-gray-100 cursor-pointer" data-link="alpha_layer1.html">
-            3) Growth of Alpha of Layer 1 Epoch-wise
+            3) Growth of Weights and Bias of Layer 1 Epoch-wise
           </div>
           <div class="py-2 px-4 hover:bg-gray-100 cursor-pointer" data-link="alpha_layer2.html">
-            4) Growth of Alpha of Layer 2 Epoch-wise
+            4) Growth of Weights and Bias of Layer 2 Epoch-wise
           </div>
           <div class="py-2 px-4 hover:bg-gray-100 cursor-pointer" data-link="alpha_layer3.html">
-            5) Growth of Alpha of Layer 3 Epoch-wise
+            5) Growth of Weights and Bias of Layer 3 Epoch-wise
           </div>
           <div class="py-2 px-4 hover:bg-gray-100 cursor-pointer" data-link="alpha_layer4.html">
-            6) Growth of Alpha of Layer 4 Epoch-wise
+            6) Growth of Weights and Bias of Layer 4 Epoch-wise
           </div>
           <div class="py-2 px-4 hover:bg-gray-100 cursor-pointer" data-link="alpha_linear.html">
-            7) Growth of Alpha of Linear Layer Epoch-wise
+            7) Growth of Weights and Bias of Linear Layer Epoch-wise
           </div>
           <div class="py-2 px-4 hover:bg-gray-100 cursor-pointer" data-link="esd_loglog.html">
-            8) Changing of ESD and Log Log plots (Video)
+            8) Changing of ESD and Alphas across Epochs
           </div>
         </div>
       </div>
