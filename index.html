@@ -11,63 +11,92 @@
     body {
       margin: 0;
       padding: 0;
-      background-color: #f0f2f5;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-family: 'Segoe UI', Tahoma, sans-serif;
+      background: linear-gradient(135deg, #e0ecff, #ffffff);
       height: 100vh;
       display: flex;
-      align-items: center;
       justify-content: center;
+      align-items: center;
     }
 
     .container {
-      text-align: center;
-      background: #fff;
-      padding: 50px 30px;
-      border-radius: 12px;
+      background: white;
+      padding: 40px;
+      border-radius: 15px;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      text-align: center;
       width: 90%;
       max-width: 600px;
     }
 
     h2 {
-      font-size: 28px;
-      color: #333;
+      font-size: 30px;
       margin-bottom: 30px;
+      color: #333;
     }
 
-    select {
-      font-size: 18px;
-      padding: 14px 18px;
+    .custom-dropdown {
+      position: relative;
+      display: inline-block;
       width: 100%;
-      border-radius: 8px;
-      border: 1px solid #ccc;
-      background-color: #fafafa;
-      transition: border 0.2s ease;
+      text-align: left;
     }
 
-    select:focus {
-      border-color: #555;
-      outline: none;
+    .dropdown-selected {
+      background-color: #f1f1f1;
+      padding: 15px 20px;
+      font-size: 18px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+
+    .dropdown-selected:hover {
+      background-color: #e6e6e6;
+    }
+
+    .dropdown-items {
+      position: absolute;
+      background-color: white;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      margin-top: 5px;
+      width: 100%;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      z-index: 1;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+    }
+
+    .dropdown-items.open {
+      max-height: 500px;
+    }
+
+    .dropdown-items div {
+      padding: 12px 20px;
+      cursor: pointer;
+      font-size: 17px;
+      transition: background-color 0.2s ease;
+    }
+
+    .dropdown-items div:hover {
+      background-color: #f0f0f0;
     }
 
     .info-section {
       margin-top: 40px;
-      font-size: 16px;
       color: #666;
+      font-size: 16px;
     }
 
-    /* Responsive: Stack on smaller screens */
     @media (max-width: 500px) {
       h2 {
-        font-size: 22px;
+        font-size: 24px;
       }
-
-      select {
+      .dropdown-selected, .dropdown-items div {
         font-size: 16px;
-      }
-
-      .info-section {
-        font-size: 14px;
       }
     }
   </style>
@@ -77,32 +106,52 @@
   <div class="container">
     <h2>Select a Visualization</h2>
 
-    <!-- Dropdown -->
-    <select id="ADVST">
-      <option value="">-- Choose an option --</option>
-      <option value="alpha_all_layers.html">1) Growth of alpha values of each layer and each epoch</option>
-      <option value="alpha_conv_layer.html">2) Growth of Alphas of Conv Layer Epoch-wise</option>
-      <option value="alpha_layer1.html">3) Growth of Alpha of Layer 1 Epoch-wise</option>
-      <option value="alpha_layer2.html">4) Growth of Alpha of Layer 2 Epoch-wise</option>
-      <option value="alpha_layer3.html">5) Growth of Alpha of Layer 3 Epoch-wise</option>
-      <option value="alpha_layer4.html">6) Growth of Alpha of Layer 4 Epoch-wise</option>
-      <option value="alpha_linear.html">7) Growth of Alpha of Linear Layer Epoch-wise</option>
-      <option value="esd_loglog.mp4">8) Changing of ESD and Log Log plots (Video)</option>
-    </select>
+    <!-- Custom Dropdown -->
+    <div class="custom-dropdown">
+      <div class="dropdown-selected" id="dropdown-toggle">-- Choose an option --</div>
+      <div class="dropdown-items" id="dropdown-options">
+        <div data-link="alpha_all_layers.html">1) Growth of alpha values of each layer and each epoch</div>
+        <div data-link="alpha_conv_layer.html">2) Growth of Alphas of Conv Layer Epoch-wise</div>
+        <div data-link="alpha_layer1.html">3) Growth of Alpha of Layer 1 Epoch-wise</div>
+        <div data-link="alpha_layer2.html">4) Growth of Alpha of Layer 2 Epoch-wise</div>
+        <div data-link="alpha_layer3.html">5) Growth of Alpha of Layer 3 Epoch-wise</div>
+        <div data-link="alpha_layer4.html">6) Growth of Alpha of Layer 4 Epoch-wise</div>
+        <div data-link="alpha_linear.html">7) Growth of Alpha of Linear Layer Epoch-wise</div>
+        <div data-link="esd_loglog.mp4">8) Changing of ESD and Log Log plots (Video)</div>
+      </div>
+    </div>
 
-    <!-- Placeholder for later descriptions or notes -->
+    <!-- Optional Notes Section -->
     <div class="info-section">
-      <!-- Add your summary/notes/explanation here later if needed -->
-      <!-- Example: <p>This dashboard provides interactive views for model layer alpha value progression.</p> -->
+      <!-- Add your explanation or paragraph here -->
+      <!-- Example: <p>This dashboard allows you to explore trends across different layers of the model.</p> -->
     </div>
   </div>
 
-  <!-- Dropdown navigation logic -->
   <script>
-    document.getElementById('ADVST').addEventListener('change', function () {
-      const selected = this.value;
-      if (selected) {
-        window.location.href = selected;
+    const toggle = document.getElementById('dropdown-toggle');
+    const options = document.getElementById('dropdown-options');
+
+    toggle.addEventListener('click', () => {
+      options.classList.toggle('open');
+    });
+
+    document.querySelectorAll('.dropdown-items div').forEach(item => {
+      item.addEventListener('click', () => {
+        const selectedText = item.textContent;
+        const targetLink = item.getAttribute('data-link');
+        toggle.textContent = selectedText;
+        options.classList.remove('open');
+        if (targetLink) {
+          window.location.href = targetLink;
+        }
+      });
+    });
+
+    // Close dropdown if clicked outside
+    document.addEventListener('click', function (event) {
+      if (!event.target.closest('.custom-dropdown')) {
+        options.classList.remove('open');
       }
     });
   </script>
